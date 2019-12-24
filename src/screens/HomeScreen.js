@@ -35,6 +35,11 @@ const HomeScreen = ({ navigation }) => {
         onPress={() => navigation.navigate("Square")}
         style={styles.buttonSpacing}
       />
+      <Button
+        title="Go to Text Demo"
+        onPress={() => navigation.navigate("Text")}
+        style={styles.buttonSpacing}
+      />
     </View>
   );
 };
