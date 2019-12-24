@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   textTwoStyle: {
     borderWidth: 3,
     borderColor: "red",
-    alignSelf: "flex-end"
+    alignSelf: "stretch"
   },
   textThreeStyle: {
     borderWidth: 3,
