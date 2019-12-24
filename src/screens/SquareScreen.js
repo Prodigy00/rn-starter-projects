@@ -6,25 +6,28 @@ const COLOUR_INCREMENT = 15;
 
 const reducer = (state, action) => {
   //   console.log(state.red, "red");
-  switch (action.colourToChange) {
-    case "red":
-      if (state.red + action.amount > 255 || state.red + action.amount < 0) {
+  switch (action.type) {
+    case "change_red":
+      if (state.red + action.payload > 255 || state.red + action.payload < 0) {
         return state;
       }
-      return { ...state, red: state.red + action.amount };
-    case "green":
+      return { ...state, red: state.red + action.payload };
+    case "change_green":
       if (
-        state.green + action.amount > 255 ||
-        state.green + action.amount < 0
+        state.green + action.payload > 255 ||
+        state.green + action.payload < 0
       ) {
         return state;
       }
-      return { ...state, green: state.green + action.amount };
-    case "blue":
-      if (state.blue + action.amount > 255 || state.blue + action.amount < 0) {
+      return { ...state, green: state.green + action.payload };
+    case "change_blue":
+      if (
+        state.blue + action.payload > 255 ||
+        state.blue + action.payload < 0
+      ) {
         return state;
       }
-      return { ...state, blue: state.blue + action.amount };
+      return { ...state, blue: state.blue + action.payload };
     default:
       return state;
   }
@@ -38,29 +41,29 @@ const SquareScreen = () => {
     <View>
       <ColourAdjuster
         onIncrease={() =>
-          dispatch({ colourToChange: "red", amount: COLOUR_INCREMENT })
+          dispatch({ type: "change_red", payload: COLOUR_INCREMENT })
         }
         onDecrease={() =>
-          dispatch({ colourToChange: "red", amount: -1 * COLOUR_INCREMENT })
+          dispatch({ type: "change_red", payload: -1 * COLOUR_INCREMENT })
         }
         colour="Red"
       />
       <ColourAdjuster
         colour="Green"
         onIncrease={() =>
-          dispatch({ colourToChange: "green", amount: COLOUR_INCREMENT })
+          dispatch({ type: "change_green", payload: COLOUR_INCREMENT })
         }
         onDecrease={() =>
-          dispatch({ colourToChange: "green", amount: -1 * COLOUR_INCREMENT })
+          dispatch({ type: "change_green", payload: -1 * COLOUR_INCREMENT })
         }
       />
       <ColourAdjuster
         colour="Blue"
         onIncrease={() =>
-          dispatch({ colourToChange: "blue", amount: COLOUR_INCREMENT })
+          dispatch({ type: "change_blue", payload: COLOUR_INCREMENT })
         }
         onDecrease={() =>
-          dispatch({ colourToChange: "blue", amount: -1 * COLOUR_INCREMENT })
+          dispatch({ type: "change_blue", payload: -1 * COLOUR_INCREMENT })
         }
       />
       <View
