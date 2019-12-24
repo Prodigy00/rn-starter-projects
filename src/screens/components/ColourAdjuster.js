@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 
 const ColourAdjuster = ({ colour, onIncrease, onDecrease }) => {

@@ -5,12 +5,25 @@ import ColourAdjuster from "./components/ColourAdjuster";
 const COLOUR_INCREMENT = 15;
 
 const reducer = (state, action) => {
+  //   console.log(state.red, "red");
   switch (action.colourToChange) {
     case "red":
+      if (state.red + action.amount > 255 || state.red + action.amount < 0) {
+        return state;
+      }
       return { ...state, red: state.red + action.amount };
     case "green":
+      if (
+        state.green + action.amount > 255 ||
+        state.green + action.amount < 0
+      ) {
+        return state;
+      }
       return { ...state, green: state.green + action.amount };
     case "blue":
+      if (state.blue + action.amount > 255 || state.blue + action.amount < 0) {
+        return state;
+      }
       return { ...state, blue: state.blue + action.amount };
     default:
       return state;
@@ -19,6 +32,8 @@ const reducer = (state, action) => {
 const SquareScreen = () => {
   const [state, dispatch] = useReducer(reducer, { red: 0, green: 0, blue: 0 });
   const { red, green, blue } = state;
+  //   console.log({ state });
+  //   console.log({ red, green, blue });
   return (
     <View>
       <ColourAdjuster
@@ -31,15 +46,6 @@ const SquareScreen = () => {
         colour="Red"
       />
       <ColourAdjuster
-        colour="Blue"
-        onIncrease={() =>
-          dispatch({ colourToChange: "blue", amount: COLOUR_INCREMENT })
-        }
-        onDecrease={() =>
-          dispatch({ colourToChange: "blue", amount: -1 * COLOUR_INCREMENT })
-        }
-      />
-      <ColourAdjuster
         colour="Green"
         onIncrease={() =>
           dispatch({ colourToChange: "green", amount: COLOUR_INCREMENT })
@@ -48,10 +54,19 @@ const SquareScreen = () => {
           dispatch({ colourToChange: "green", amount: -1 * COLOUR_INCREMENT })
         }
       />
+      <ColourAdjuster
+        colour="Blue"
+        onIncrease={() =>
+          dispatch({ colourToChange: "blue", amount: COLOUR_INCREMENT })
+        }
+        onDecrease={() =>
+          dispatch({ colourToChange: "blue", amount: -1 * COLOUR_INCREMENT })
+        }
+      />
       <View
         style={{
-          height: 150,
-          width: 150,
+          height: 100,
+          width: 100,
           backgroundColor: `rgb(${red},${green},${blue})`
         }}
       />
